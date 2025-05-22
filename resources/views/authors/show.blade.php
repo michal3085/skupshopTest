@@ -5,7 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Autor') }}</div>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        {{ __('Autor') }}
+                        <a href="{{ route('authors.edit', $author) }}" class="btn btn-primary btn-sm">
+                            Edytuj
+                        </a>
+                    </div>
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
