@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -53,7 +54,29 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $fileName = $file->getClientOriginalName();
+                $file->storeAs('public/files', $fileName);
+
+                $book->filename = $fileName;
+                $book->save();
+            }
+
+            DB::commit();
+
+            return response()->json(['message' => 'Updated successfully']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'message' => 'Update failed',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**

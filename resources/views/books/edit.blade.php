@@ -15,6 +15,7 @@
 
                         <form method="POST" action="{{ route('books.update', $book) }}">
                             @csrf
+                            @method('put')
 
                             <div class="row mb-3">
                                 <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('Title') }}</label>
