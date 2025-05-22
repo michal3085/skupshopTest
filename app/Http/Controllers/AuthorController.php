@@ -56,19 +56,17 @@ class AuthorController extends Controller
     public function update(UpdateRequest $request, Author $author)
     {
         DB::beginTransaction();
-
         try {
             $author->fill($request->validated());
             $author->save();
-
-            DB::commit();
-
-            return redirect()->back()->with('success', 'Autor został zaktualizowany');
         } catch (\Exception $e) {
             DB::rollBack();
 
             return redirect()->back()->with('error', 'Wystąpił błąd podczas aktualizacji autora');
         }
+        DB::commit();
+
+        return redirect()->back()->with('success', 'Autor został zaktualizowany');
     }
 
     /**
