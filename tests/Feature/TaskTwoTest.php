@@ -16,6 +16,7 @@ class TaskTwoTest extends TestCase
 
         /*
          * Ewentualnie, jeżeli ma pozostać funkcja miękkiego usuwania, należy zmienić test.
+         * Zastosowałem to w zadaniu 3.
          * $this->assertSoftDeleted('books', ['id' => $book->id]);
          */
     }
