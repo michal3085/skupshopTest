@@ -13,5 +13,10 @@ class TaskTwoTest extends TestCase
         $response = $this->delete(route('books.destroy', $book));
         $response->assertStatus(200);
         $this->assertDatabaseCount('books', 0);
+
+        /*
+         * Ewentualnie, jeżeli ma pozostać funkcja miękkiego usuwania, należy zmienić test.
+         * $this->assertSoftDeleted('books', ['id' => $book->id]);
+         */
     }
 }
