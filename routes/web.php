@@ -4,6 +4,7 @@ use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +14,8 @@ Auth::routes();
 Route::get('/', function () {
     return redirect(route('books.index'));
 });
+
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 Route::resource('books', BookController::class);
 
