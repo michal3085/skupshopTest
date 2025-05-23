@@ -20,6 +20,7 @@ class AttributeFactory extends Factory
             'width' => fake()->randomElement(range(100, 180, 10)),
             'height' => fake()->randomElement(range(200, 280, 10)),
             'weight' => fake()->randomElement(range(10000, 58000, 10)) / 100,
+            'pages' => $this->faker->numberBetween(10, 1000),
         ];
     }
 }
