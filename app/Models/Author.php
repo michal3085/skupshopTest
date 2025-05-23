@@ -13,6 +13,7 @@ class Author extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'birth_date',
         'dead_date',
     ];
@@ -25,5 +26,10 @@ class Author extends Model
     public function getAgeAttribute()
     {
         return $this->dead_date->diffInYears($this->birth_date);
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }
