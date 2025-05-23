@@ -18,7 +18,7 @@ Route::resource('books', BookController::class);
 
 Route::resource('authors', AuthorController::class);
 
-Route::resource('attributes', AttributeController::class)->only(['index']);
+Route::resource('attributes', AttributeController::class);
 
 Route::resource('categories', CategoryController::class)->only(['index']);
 

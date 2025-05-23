@@ -13,6 +13,7 @@ class Attribute extends Model
         'width',
         'height',
         'weight',
+        'pages',
     ];
 
     protected $casts = [
