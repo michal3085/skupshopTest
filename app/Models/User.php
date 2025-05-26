@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\RoleEnum;
 use App\Traits\HasRolesTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,4 +46,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'users_roles');
+    }
+
+    public function hasRole($roleName): bool
+    {
+        return $this->roles->contains('name', $roleName);
+    }
+
+    public function getRoleLabels(): array
+    {
+        return $this->roles->map(function ($role) {
+            return RoleEnum::tryFrom($role->name)?->label() ?? $role->name;
+        })->toArray();
+    }
 }

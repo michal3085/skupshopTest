@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Author\UpdateRequest;
 use App\Models\Author;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AuthorController extends Controller
 {
@@ -51,9 +53,20 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Author $author)
+    public function update(UpdateRequest $request, Author $author)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $author->fill($request->validated());
+            $author->save();
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()->back()->with('error', 'Wystąpił błąd podczas aktualizacji autora');
+        }
+        DB::commit();
+
+        return redirect()->back()->with('success', 'Autor został zaktualizowany');
     }
 
     /**

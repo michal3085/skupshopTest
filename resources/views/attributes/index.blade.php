@@ -26,7 +26,9 @@
                             @foreach($attributes as $attribute)
                                 <tr>
                                     <td>
-                                        {{ $loop->iteration }}
+                                        <a href="{{ route('attributes.edit', $attribute) }}">
+                                            {{ $loop->iteration }}
+                                        </a>
                                     </td>
                                     <td>
                                         {{ $attribute->width }}
